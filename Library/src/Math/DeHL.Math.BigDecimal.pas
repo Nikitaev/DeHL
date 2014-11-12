@@ -1084,7 +1084,7 @@ begin
   if not InternalTryParse(AString, Result, FormatSettings.DecimalSeparator, FormatSettings.ThousandSeparator)
 {$ELSE}
   if not InternalTryParse(AString, Result, DecimalSeparator, ThousandSeparator)
-{$IFEND}
+{$ENDIF}
   then
     ExceptionHelper.Throw_ArgumentConverError('AString');
 end;
@@ -1276,7 +1276,7 @@ begin
   Result := InternalToString(AScientificFormat, FormatSettings.DecimalSeparator);
 {$ELSE}
   Result := InternalToString(AScientificFormat, DecimalSeparator);
-{$IFEND}
+{$ENDIF}
 end;
 
 class function BigDecimal.TryParse(const AString: string;
@@ -1294,7 +1294,7 @@ begin
   Result := InternalTryParse(AString, ANumber, FormatSettings.DecimalSeparator, FormatSettings.ThousandSeparator);
 {$ELSE}
   Result := InternalTryParse(AString, ANumber, DecimalSeparator, ThousandSeparator);
-{$IFEND}
+{$ENDIF}
 end;
 
 function BigDecimal.Abs: BigDecimal;
@@ -2161,7 +2161,7 @@ begin
 {$ELSE}
     AContext.GetValue(TValueInfo.Create(SScale), Int64(FScale));
     AContext.GetValue(TValueInfo.Create(SPrecision), UInt64(FPrec));
-{$IFEND}
+{$ENDIF}
     FBigIntegerType.Deserialize(TValueInfo.Create(SUnscaledValue), FInt, AContext);
 
     { And instantiate a decimal }

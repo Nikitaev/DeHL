@@ -335,7 +335,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  Self := TSortedMultiMap<TKey, TValue>.Create(LAsc);
 end;
 
 procedure TSortedMultiMap<TKey, TValue>.StartSerializing(const AData: TSerializationData);

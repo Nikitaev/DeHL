@@ -246,7 +246,7 @@ type
 type
   PNativeInt = ^NativeInt;
   PNativeUInt = ^NativeUInt;
-{$IFEND}
+{$ENDIF}
 
 type
   ///  <summary>Internally used &lt;Pointer, Pointer&gt; dictionary.</summary>

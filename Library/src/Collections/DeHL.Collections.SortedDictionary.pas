@@ -39,12 +39,13 @@ uses SysUtils,
      DeHL.Collections.Base;
 
 type
+  TBalanceAct = (baStart, baLeft, baRight, baLoop, baEnd);
   ///  <summary>The generic <c>sorted dictionary</c> collection.</summary>
   ///  <remarks>This type uses an AVL-tree to store its key-value pairs.</remarks>
   TSortedDictionary<TKey, TValue> = class(TEnexAssociativeCollection<TKey, TValue>, IDictionary<TKey, TValue>)
   private type
     {$REGION 'Internal Types'}
-    TBalanceAct = (baStart, baLeft, baRight, baLoop, baEnd);
+    
 
     { An internal node class }
     TNode = class
@@ -1414,7 +1415,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  Self := TSortedDictionary<TKey, TValue>.Create(LAsc);
 end;
 
 procedure TSortedDictionary<TKey, TValue>.StartSerializing(const AData: TSerializationData);

@@ -176,7 +176,7 @@ end;
 procedure TDistinctMultiMap<TKey, TValue>.StartDeserializing(const AData: TDeserializationData);
 begin
   { Call the constructor in this instance to initialize myself first }
-  Create();
+  Self := TDistinctMultiMap<TKey, TValue>.Create();
 end;
 
 procedure TDistinctMultiMap<TKey, TValue>.StartSerializing(const AData: TSerializationData);

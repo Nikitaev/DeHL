@@ -630,12 +630,25 @@ function TDictionary<TKey, TValue>.FindEntry(const AKey: TKey): NativeInt;
 var
   HashCode: NativeInt;
   I       : NativeInt;
+  zKey    : TKey;
 begin
   Result := -1;
+  {
+  for I := 0 to Length(FEntryArray) - 1 do
+  begin
+    zHashCode := FEntryArray[I].FHashCode;
+    zKey := FEntryArray[I].FKey;
+    if (zHashCode <> -1) and (KeyType.AreEqual(zKey, AKey)) then
+    begin
+      Result := I;
+      exit;
+    end;
+  end;}
 
+  
   if Length(FBucketArray) > 0 then
   begin
-    { Generate the hash code }
+    // Generate the hash code
     HashCode := Hash(AKey);
 
     I := FBucketArray[HashCode mod Length(FBucketArray)];
@@ -648,6 +661,7 @@ begin
       I := FEntryArray[I].FNext;
     end;
   end;
+  
 end;
 
 function TDictionary<TKey, TValue>.GetCount: NativeUInt;

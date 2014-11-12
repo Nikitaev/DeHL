@@ -381,7 +381,7 @@ begin
   AData.GetValue(SSerAscendingValues, LAscValues);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAscKeys, LAscValues);
+  Self := TDoubleSortedBidiMap<TKey, TValue>.Create(LAscKeys, LAscValues);
 end;
 
 procedure TDoubleSortedBidiMap<TKey, TValue>.StartSerializing(const AData: TSerializationData);

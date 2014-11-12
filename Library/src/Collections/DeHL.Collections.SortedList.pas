@@ -1076,7 +1076,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  Self := TSortedList<T>.Create(LAsc);
 end;
 
 procedure TSortedList<T>.StartSerializing(const AData: TSerializationData);

@@ -882,7 +882,7 @@ begin
        LTemp: Integer;
 {$ELSE}
        LTemp: Int64;
-{$IFEND}
+{$ENDIF}
      begin
        Result := TryStrToInt(string(AIn), LTemp);
        if Result then
@@ -2264,7 +2264,7 @@ begin
        LTemp: Integer;
 {$ELSE}
        LTemp: Int64;
-{$IFEND}
+{$ENDIF}
      begin
        Result := TryStrToInt(string(AIn), LTemp);
        if Result then
@@ -2824,7 +2824,7 @@ begin
        LTemp: Integer;
 {$ELSE}
        LTemp: Int64;
-{$IFEND}
+{$ENDIF}
      begin
        Result := TryStrToInt(UCS4StringToUnicodeString(AIn), LTemp);
        if Result then
@@ -3207,7 +3207,7 @@ begin
        LTemp: Integer;
 {$ELSE}
        LTemp: Int64;
-{$IFEND}
+{$ENDIF}
      begin
        Result := TryStrToInt(AIn, LTemp);
        if Result then
@@ -3560,7 +3560,7 @@ begin
        LTemp: Integer;
 {$ELSE}
        LTemp: Int64;
-{$IFEND}
+{$ENDIF}
      begin
        Result := TryStrToInt(AIn, LTemp);
        if Result then

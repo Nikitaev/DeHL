@@ -38,12 +38,12 @@ uses SysUtils,
      DeHL.Collections.Base;
 
 type
+  TBalanceAct = (baStart, baLeft, baRight, baLoop, baEnd);
   ///  <summary>The generic <c>set</c> collection.</summary>
   ///  <remarks>This type uses an AVL tree to store its values.</remarks>
   TSortedSet<T> = class(TEnexCollection<T>, ISet<T>)
   private type
-    {$REGION 'Internal Types'}
-    TBalanceAct = (baStart, baLeft, baRight, baLoop, baEnd);
+    {$REGION 'Internal Types'}    
 
     { An internal node class }
     TNode = class
@@ -1209,7 +1209,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  Self := TSortedSet<T>.Create(LAsc);
 end;
 
 procedure TSortedSet<T>.StartSerializing(const AData: TSerializationData);

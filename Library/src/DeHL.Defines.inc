@@ -31,7 +31,6 @@
 {$IF CompilerVersion < 21}
   {$MESSAGE ERROR 'DeHL requires at least Delphi 2010 to build and run.'}
 {$IFEND}
-
 {
    Type:  Compiler BUG.
    When:  At Compile

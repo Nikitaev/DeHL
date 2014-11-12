@@ -202,7 +202,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  Self := TSortedBag<T>.Create(LAsc);
 end;
 
 procedure TSortedBag<T>.StartSerializing(const AData: TSerializationData);

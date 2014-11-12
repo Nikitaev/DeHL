@@ -143,7 +143,7 @@ end;
 procedure TBag<T>.StartDeserializing(const AData: TDeserializationData);
 begin
   { Call the constructor in this instance to initialize myself first }
-  Create();
+  Self := TBag<T>.Create();
 end;
 
 procedure TBag<T>.StartSerializing(const AData: TSerializationData);

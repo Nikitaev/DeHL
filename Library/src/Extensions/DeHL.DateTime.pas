@@ -977,7 +977,7 @@ begin
   else
      Result := LongOp[1] xor LongOp[0];
 end;
-{$IFEND}
+{$ENDIF}
 
 function TDateType.GetString(const AValue: TDate): String;
 begin
@@ -1303,7 +1303,7 @@ begin
   else
      Result := LongOp[1] xor LongOp[0];
 end;
-{$IFEND}
+{$ENDIF}
 
 function TTimeType.GetString(const AValue: TTime): String;
 begin
@@ -1683,7 +1683,7 @@ begin
   else
      Result := LongOp[1] xor LongOp[0];
 end;
-{$IFEND}
+{$ENDIF}
 
 function TDateTimeType.GetString(const AValue: TDateTime): String;
 begin

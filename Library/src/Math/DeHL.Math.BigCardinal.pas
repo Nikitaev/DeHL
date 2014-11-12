@@ -1186,7 +1186,7 @@ begin
     FLength := 2;
 {$ELSE}
     SetPieces(ANumber, SizeOf(Int64));
-{$IFEND}
+{$ENDIF}
 
     { Cleanup afterwards }
     RemoveLeadingZeroes();
@@ -1204,7 +1204,7 @@ begin
     FLength := 1;
 {$ELSE}
     SetPieces(ANumber, SizeOf(Integer));
-{$IFEND}
+{$ENDIF}
 
     { Cleanup afterwards }
     RemoveLeadingZeroes();
@@ -1290,7 +1290,7 @@ begin
     FLength := 2;
 {$ELSE}
     SetPieces(ANumber, SizeOf(UInt64));
-{$IFEND}
+{$ENDIF}
 
     { Cleanup afterwards }
     RemoveLeadingZeroes();
@@ -1308,7 +1308,7 @@ begin
     FLength := 1;
 {$ELSE}
     SetPieces(ANumber, SizeOf(Cardinal));
-{$IFEND}
+{$ENDIF}
 
     { Cleanup afterwards }
     RemoveLeadingZeroes();

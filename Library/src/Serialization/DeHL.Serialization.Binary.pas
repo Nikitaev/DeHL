@@ -417,7 +417,7 @@ const
   CAllowed = [sptByte, sptWord, sptCardinal, sptInt64];
 {$ELSE}
   CAllowed = [sptByte, sptWord, sptCardinal];
-{$IFEND}
+{$ENDIF}
 
 var
   LPoint: TStreamPointType;
@@ -462,7 +462,7 @@ begin
     else
       ONatural := LCard;
   end else
-{$IFEND}
+{$ENDIF}
   begin
     { Was a cardinal }
     if not ReadBuffer(ONatural, SizeOf(NativeUInt)) then
@@ -766,7 +766,7 @@ var
   LWord: Word;
 {$IF SizeOf(NativeUInt) > SizeOf(Cardinal)}
   LCard: Cardinal;
-{$IFEND}
+{$ENDIF}
 begin
   Result := wsSuccess;
 
@@ -817,7 +817,7 @@ begin
     if not WriteBuffer(ANatural, SizeOf(Cardinal)) then
       Result := wsWriteError;
   end;
-{$IFEND}
+{$ENDIF}
 end;
 
 function TBinarySerializer<T>.TBinarySerializationContext.WriteValuePrefix(const AType: TStreamPointType): TWriteStatus;

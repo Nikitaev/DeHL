@@ -776,7 +776,7 @@ begin
   Result := CompareStringW(LOCALE_INVARIANT, 0, ALeft, MaxLen, ARight, MaxLen) - CSTR_EQUAL;
 {$ELSE}
   Result := SysUtils.StrLComp(ALeft, ARight, MaxLen);
-{$IFEND}
+{$ENDIF}
 end;
 
 function __InvariantCaseInsensitive(const ALeft, ARight: PWideChar; const MaxLen: NativeUInt): NativeInt;
@@ -785,7 +785,7 @@ begin
   Result := CompareStringW(LOCALE_INVARIANT, NORM_IGNORECASE, ALeft, MaxLen, ARight, MaxLen) - CSTR_EQUAL;
 {$ELSE}
   Result := SysUtils.StrLIComp(ALeft, ARight, MaxLen);
-{$IFEND}
+{$ENDIF}
 end;
 
 function __OrdinalCaseSensitive(const ALeft, ARight: PWideChar; const MaxLen: NativeUInt): NativeInt;
@@ -1493,7 +1493,7 @@ begin
 {$ELSE}
 begin
   Result.FString := AnsiLowerCase(FString);
-{$IFEND}
+{$ENDIF}
 end;
 
 function TString.ToLowerInvariant: TString;
@@ -1526,7 +1526,7 @@ begin
 {$ELSE}
 begin
   Result.FString := AnsiUpperCase(FString);
-{$IFEND}
+{$ENDIF}
 end;
 
 function TString.ToUpperInvariant: TString;

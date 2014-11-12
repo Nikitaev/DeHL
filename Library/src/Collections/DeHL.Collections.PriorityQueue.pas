@@ -596,7 +596,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  Self := TPriorityQueue<TPriority, TValue>.Create(LAsc);
 end;
 
 procedure TPriorityQueue<TPriority, TValue>.StartSerializing(const AData: TSerializationData);
