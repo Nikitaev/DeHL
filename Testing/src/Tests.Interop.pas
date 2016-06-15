@@ -616,3 +616,4 @@ initialization
   TestFramework.RegisterTest(TTestCollectionsInterop.Suite);
 
 end.
+

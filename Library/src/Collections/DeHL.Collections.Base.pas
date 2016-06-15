@@ -1883,9 +1883,9 @@ type
       IEnexAssociativeCollection<TKey, TValue>)
   private
     FKeyType: IType<TKey>;
-    FValueType: IType<TValue>;
 
   protected
+    FValueType: IType<TValue>;
     ///  <summary>Specifies the type object that describes the keys of the stored pairs.</summary>
     ///  <returns>A type object describing the keys.</returns>
     property KeyType: IType<TKey> read FKeyType;

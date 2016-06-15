@@ -1,46 +1,48 @@
 (*
-* Copyright (c) 2009-2010, Ciobanu Alexandru
-* All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions are met:
-*     * Redistributions of source code must retain the above copyright
-*       notice, this list of conditions and the following disclaimer.
-*     * Redistributions in binary form must reproduce the above copyright
-*       notice, this list of conditions and the following disclaimer in the
-*       documentation and/or other materials provided with the distribution.
-*     * Neither the name of the <organization> nor the
-*       names of its contributors may be used to endorse or promote products
-*       derived from this software without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY
-* EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
-* DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-* SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * Copyright (c) 2009-2010, Ciobanu Alexandru
+  * All rights reserved.
+  *
+  * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+  *     * Redistributions of source code must retain the above copyright
+  *       notice, this list of conditions and the following disclaimer.
+  *     * Redistributions in binary form must reproduce the above copyright
+  *       notice, this list of conditions and the following disclaimer in the
+  *       documentation and/or other materials provided with the distribution.
+  *     * Neither the name of the <organization> nor the
+  *       names of its contributors may be used to endorse or promote products
+  *       derived from this software without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY
+  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  * DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+  * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *)
 
 {$I ../DeHL.Defines.inc}
 unit DeHL.WideCharSet;
+
 interface
+
 uses SysUtils,
-     DeHL.Base,
-     DeHL.Types,
-     DeHL.Exceptions,
-     DeHL.Cloning,
-     DeHL.Serialization,
-     DeHL.Collections.Base;
+  DeHL.Base,
+  DeHL.Types,
+  DeHL.Exceptions,
+  DeHL.Cloning,
+  DeHL.Serialization,
+  DeHL.Collections.Base;
 
 type
-  ///  <summary>A wide char set.</summary>
-  ///  <remarks><see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> is compatible to Delphi's
-  ///  "set of AnsiChar". The essential difference is the fact that this type operates on wide characters instead
-  ///  of ANSI characters.</remarks>
+  /// <summary>A wide char set.</summary>
+  /// <remarks><see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> is compatible to Delphi's
+  /// "set of AnsiChar". The essential difference is the fact that this type operates on wide characters instead
+  /// of ANSI characters.</remarks>
   TWideCharSet = record
   private const
     CCharSets = 256;
@@ -86,136 +88,144 @@ type
     { Sets or unsets a char in the array }
     procedure MarkChar(const AChar: Char; const AMark: Boolean); inline;
   public
-    ///  <summary>Initializes a <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value.</summary>
-    ///  <param name="ACharSet">Another <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value to copy.</param>
+    /// <summary>Initializes a <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value.</summary>
+    /// <param name="ACharSet">Another <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value to copy.</param>
     constructor Create(const ACharSet: TWideCharSet); overload;
 
-    ///  <summary>Initializes a <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value.</summary>
-    ///  <param name="ACharSet">An AnsiChar set.</param>
+    /// <summary>Initializes a <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value.</summary>
+    /// <param name="ACharSet">An AnsiChar set.</param>
     constructor Create(const ACharSet: TSysCharSet); overload;
 
-    ///  <summary>Initializes a <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value.</summary>
-    ///  <param name="AChar">A single char to be added to the set.</param>
+    /// <summary>Initializes a <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value.</summary>
+    /// <param name="AChar">A single char to be added to the set.</param>
     constructor Create(const AChar: Char); overload;
 
-    ///  <summary>Initializes a <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value.</summary>
-    ///  <param name="AString">A string containing Wide characters. Each distinct character in the string
-    ///  is added to the set.</param>
+    /// <summary>Initializes a <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> value.</summary>
+    /// <param name="AString">A string containing Wide characters. Each distinct character in the string
+    /// is added to the set.</param>
     constructor Create(const AString: String); overload;
 
-    ///  <summary>Returns an enumerator.</summary>
-    ///  <remarks>The traversal is performed from <c>0</c> to <c>65536</c> and only involves the characters that are in the set.</remarks>
-    ///  <returns>An <see cref="DeHL.Base|IEnumerator&lt;T&gt;">DeHL.Base.IEnumerator&lt;T&gt;</see> that can traverse this set.</returns>
+    /// <summary>Returns an enumerator.</summary>
+    /// <remarks>The traversal is performed from <c>0</c> to <c>65536</c> and only involves the characters that are in the set.</remarks>
+    /// <returns>An <see cref="DeHL.Base|IEnumerator&lt;T&gt;">DeHL.Base.IEnumerator&lt;T&gt;</see> that can traverse this set.</returns>
     function GetEnumerator(): IEnumerator<Char>;
 
-    ///  <summary>Returns a collection object.</summary>
-    ///  <remarks>A new collection is created each time this method is called.</remarks>
-    ///  <returns>An <see cref="DeHL.Collections.Base|IEnexCollection&lt;T&gt;">DeHL.Collections.Base.IEnexCollection&lt;T&gt;</see>
-    ///  operating on the characters in this set.</returns>
+    /// <summary>Returns a collection object.</summary>
+    /// <remarks>A new collection is created each time this method is called.</remarks>
+    /// <returns>An <see cref="DeHL.Collections.Base|IEnexCollection&lt;T&gt;">DeHL.Collections.Base.IEnexCollection&lt;T&gt;</see>
+    /// operating on the characters in this set.</returns>
     function AsCollection(): IEnexCollection<Char>;
 
-    ///  <summary>Overloaded "=" operator.</summary>
-    ///  <param name="ALeft">Left-hand-side wide char set.</param>
-    ///  <param name="ARight">Right-hand-side wide char set.</param>
-    ///  <returns><c>True</c> if the sets contain the same elements; <c>False</c> otherwise.</returns>
+    /// <summary>Overloaded "=" operator.</summary>
+    /// <param name="ALeft">Left-hand-side wide char set.</param>
+    /// <param name="ARight">Right-hand-side wide char set.</param>
+    /// <returns><c>True</c> if the sets contain the same elements; <c>False</c> otherwise.</returns>
     class operator Equal(const ALeft, ARight: TWideCharSet): Boolean;
 
-    ///  <summary>Overloaded "<>" operator.</summary>
-    ///  <param name="ALeft">Left-hand-side wide char set.</param>
-    ///  <param name="ARight">Right-hand-side wide char set.</param>
-    ///  <returns><c>False</c> if the sets contain the same elements; <c>True</c> otherwise.</returns>
+    /// <summary>Overloaded "<>" operator.</summary>
+    /// <param name="ALeft">Left-hand-side wide char set.</param>
+    /// <param name="ARight">Right-hand-side wide char set.</param>
+    /// <returns><c>False</c> if the sets contain the same elements; <c>True</c> otherwise.</returns>
     class operator NotEqual(const ALeft, ARight: TWideCharSet): Boolean; inline;
 
-    ///  <summary>Overloaded "+" operator.</summary>
-    ///  <param name="ALeft">Left-hand-side wide char set.</param>
-    ///  <param name="ARight">Right-hand-side wide char.</param>
-    ///  <returns>A char set that contains the combined elements.</returns>
+    /// <summary>Overloaded "+" operator.</summary>
+    /// <param name="ALeft">Left-hand-side wide char set.</param>
+    /// <param name="ARight">Right-hand-side wide char.</param>
+    /// <returns>A char set that contains the combined elements.</returns>
     class operator Add(const ALeft: TWideCharSet; const AChar: Char): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "+" operator.</summary>
-    ///  <param name="ALeft">Left-hand-side wide char set.</param>
-    ///  <param name="ARight">Right-hand-side wide char set.</param>
-    ///  <returns>A char set that contains the combined elements.</returns>
+    /// <summary>Overloaded "+" operator.</summary>
+    /// <param name="ALeft">Left-hand-side wide char set.</param>
+    /// <param name="ARight">Right-hand-side wide char set.</param>
+    /// <returns>A char set that contains the combined elements.</returns>
     class operator Add(const ALeft: TWideCharSet; const ARight: TWideCharSet): TWideCharSet;
 
-    ///  <summary>Overloaded "-" operator.</summary>
-    ///  <param name="ALeft">Left-hand-side wide char set.</param>
-    ///  <param name="ARight">Right-hand-side wide char.</param>
-    ///  <returns>A char set that contains the difference.</returns>
+    class operator Add(const ALeft: TWideCharSet; const ARight: TSysCharSet): TWideCharSet;
+
+    /// <summary>Overloaded "-" operator.</summary>
+    /// <param name="ALeft">Left-hand-side wide char set.</param>
+    /// <param name="ARight">Right-hand-side wide char.</param>
+    /// <returns>A char set that contains the difference.</returns>
     class operator Subtract(const ALeft: TWideCharSet; AChar: Char): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "-" operator.</summary>
-    ///  <param name="ALeft">Left-hand-side wide char set.</param>
-    ///  <param name="ARight">Right-hand-side wide char set.</param>
-    ///  <returns>A wide char set that contains the difference.</returns>
+    /// <summary>Overloaded "-" operator.</summary>
+    /// <param name="ALeft">Left-hand-side wide char set.</param>
+    /// <param name="ARight">Right-hand-side wide char set.</param>
+    /// <returns>A wide char set that contains the difference.</returns>
     class operator Subtract(const ALeft: TWideCharSet; ARight: TWideCharSet): TWideCharSet;
 
-    ///  <summary>Overloaded "Include" operator.</summary>
-    ///  <param name="ALeft">The wide char set in which to include.</param>
-    ///  <param name="ARight">Character to include.</param>
-    ///  <returns>A char set that contains combined elements.</returns>
+    class operator Subtract(const ALeft: TWideCharSet; const ARight: TSysCharSet): TWideCharSet;
+
+    /// <summary>Overloaded "Include" operator.</summary>
+    /// <param name="ALeft">The wide char set in which to include.</param>
+    /// <param name="ARight">Character to include.</param>
+    /// <returns>A char set that contains combined elements.</returns>
     class operator Include(const ALeft: TWideCharSet; const AChar: Char): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "Include" operator.</summary>
-    ///  <param name="ALeft">The wide char set in which to include.</param>
-    ///  <param name="ARight">The string containing wide characters to include.</param>
-    ///  <returns>A char set that contain combined elements.</returns>
+    /// <summary>Overloaded "Include" operator.</summary>
+    /// <param name="ALeft">The wide char set in which to include.</param>
+    /// <param name="ARight">The string containing wide characters to include.</param>
+    /// <returns>A char set that contain combined elements.</returns>
     class operator Include(const ALeft: TWideCharSet; const AString: String): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "Include" operator.</summary>
-    ///  <param name="ALeft">The wide char set in which to include.</param>
-    ///  <param name="ARight">The wide char set to include.</param>
-    ///  <returns>A char set that contain combined elements.</returns>
+    /// <summary>Overloaded "Include" operator.</summary>
+    /// <param name="ALeft">The wide char set in which to include.</param>
+    /// <param name="ARight">The wide char set to include.</param>
+    /// <returns>A char set that contain combined elements.</returns>
     class operator Include(const ALeft: TWideCharSet; const ASet: TWideCharSet): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "Exclude" operator.</summary>
-    ///  <param name="ALeft">The wide char set from which to exclude.</param>
-    ///  <param name="ARight">The character to exclude from the set.</param>
-    ///  <returns>A char set that contains the difference.</returns>
+    class operator Include(const ALeft: TWideCharSet; const ARight: TSysCharSet): TWideCharSet; inline;
+
+    /// <summary>Overloaded "Exclude" operator.</summary>
+    /// <param name="ALeft">The wide char set from which to exclude.</param>
+    /// <param name="ARight">The character to exclude from the set.</param>
+    /// <returns>A char set that contains the difference.</returns>
     class operator Exclude(const ALeft: TWideCharSet; const AChar: Char): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "Exclude" operator.</summary>
-    ///  <param name="ALeft">The wide char set from which to exclude.</param>
-    ///  <param name="ARight">The string containing wide characters to exclude.</param>
-    ///  <returns>A char set that contains the difference.</returns>
+    /// <summary>Overloaded "Exclude" operator.</summary>
+    /// <param name="ALeft">The wide char set from which to exclude.</param>
+    /// <param name="ARight">The string containing wide characters to exclude.</param>
+    /// <returns>A char set that contains the difference.</returns>
     class operator Exclude(const ALeft: TWideCharSet; const AString: String): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "Exclude" operator.</summary>
-    ///  <param name="ALeft">The wide char set from which to exclude.</param>
-    ///  <param name="ARight">The wide char set to exclude</param>
-    ///  <returns>A char set that contains the difference.</returns>
+    /// <summary>Overloaded "Exclude" operator.</summary>
+    /// <param name="ALeft">The wide char set from which to exclude.</param>
+    /// <param name="ARight">The wide char set to exclude</param>
+    /// <returns>A char set that contains the difference.</returns>
     class operator Exclude(const ALeft: TWideCharSet; const ASet: TWideCharSet): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "In" operator.</summary>
-    ///  <param name="AChar">The character to check for inclusion.</param>
-    ///  <param name="ARight">The set to check against.</param>
-    ///  <returns><c>True</c> is the specified character is found in the set.</returns>
-    class operator In(const AChar: Char; const ARight: TWideCharSet): Boolean;
+    class operator Exclude(const ALeft: TWideCharSet; const ARight: TSysCharSet): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "Implicit" operator.</summary>
-    ///  <param name="ARight">An ANSI char set.</param>
-    ///  <returns>A wide char set containing the ANSI char set.</returns>
+    /// <summary>Overloaded "In" operator.</summary>
+    /// <param name="AChar">The character to check for inclusion.</param>
+    /// <param name="ARight">The set to check against.</param>
+    /// <returns><c>True</c> is the specified character is found in the set.</returns>
+    class operator In (const AChar: Char; const ARight: TWideCharSet): Boolean;
+
+    /// <summary>Overloaded "Implicit" operator.</summary>
+    /// <param name="ARight">An ANSI char set.</param>
+    /// <returns>A wide char set containing the ANSI char set.</returns>
     class operator Implicit(const ARight: TSysCharSet): TWideCharSet; inline;
 
-    ///  <summary>Overloaded "Implicit" operator.</summary>
-    ///  <param name="ALeft">The char set.</param>
-    ///  <returns>An ANSI char set containing only the wide characters that can be converted to ANSI characters.</returns>
+    /// <summary>Overloaded "Implicit" operator.</summary>
+    /// <param name="ALeft">The char set.</param>
+    /// <returns>An ANSI char set containing only the wide characters that can be converted to ANSI characters.</returns>
     class operator Implicit(const ALeft: TWideCharSet): TSysCharSet; inline;
 
-    ///  <summary>Returns the DeHL type object for this type.</summary>
-    ///  <returns>An <see cref="DeHL.Types|IType&lt;T&gt;">DeHL.Types.IType&lt;T&gt;</see> that represents
-    ///  <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> type.</returns>
+    /// <summary>Returns the DeHL type object for this type.</summary>
+    /// <returns>An <see cref="DeHL.Types|IType&lt;T&gt;">DeHL.Types.IType&lt;T&gt;</see> that represents
+    /// <see cref="DeHL.WideCharSet|TWideCharSet">DeHL.WideCharSet.TWideCharSet</see> type.</returns>
     class function GetType(): IType<TWideCharSet>; static;
   end;
 
-  ///  <summary>Checks if a given character is part of the set.</summary>
-  ///  <remarks>This function is provided for compatibility with the RTL, and is not recommented to be used.
-  ///  Use the <see cref="DeHL.WideCharSet|TWideCharSet> "in" operator instead.
-  ///  </remarks>
-  ///  <param name="C">The character to be checked.</param>
-  ///  <param name="CharSet">The char set to be tested against.</param>
-  ///  <returns><c>True</c> if the set contains the character; <c>False</c> otherwise.</returns>
-  function CharInSet(C: WideChar; const CharSet: TWideCharSet): Boolean; overload; inline;
+  /// <summary>Checks if a given character is part of the set.</summary>
+  /// <remarks>This function is provided for compatibility with the RTL, and is not recommented to be used.
+  /// Use the <see cref="DeHL.WideCharSet|TWideCharSet> "in" operator instead.
+  /// </remarks>
+  /// <param name="C">The character to be checked.</param>
+  /// <param name="CharSet">The char set to be tested against.</param>
+  /// <returns><c>True</c> if the set contains the character; <c>False</c> otherwise.</returns>
+function CharInSet(C: WideChar; const CharSet: TWideCharSet): Boolean; overload; inline;
 
 implementation
 
@@ -224,8 +234,10 @@ type
   TWideCharSetType = class sealed(TRecordType<TWideCharSet>)
   protected
     { Serialization }
-    procedure DoSerialize(const AInfo: TValueInfo; const AValue: TWideCharSet; const Acontext: ISerializationContext); override;
-    procedure DoDeserialize(const AInfo: TValueInfo; out AValue: TWideCharSet; const AContext: IDeserializationContext); override;
+    procedure DoSerialize(const AInfo: TValueInfo; const AValue: TWideCharSet;
+      const Acontext: ISerializationContext); override;
+    procedure DoDeserialize(const AInfo: TValueInfo; out AValue: TWideCharSet;
+      const Acontext: IDeserializationContext); override;
 
   public
     { Comparator }
@@ -242,7 +254,7 @@ type
     function TryConvertFromVariant(const AValue: Variant; out ORes: TWideCharSet): Boolean; override;
   end;
 
-{ TWideCharSetType }
+  { TWideCharSetType }
 
 function TWideCharSetType.Compare(const AValue1, AValue2: TWideCharSet): NativeInt;
 begin
@@ -253,18 +265,20 @@ begin
     Result := 1;
 end;
 
-procedure TWideCharSetType.DoDeserialize(const AInfo: TValueInfo; out AValue: TWideCharSet; const AContext: IDeserializationContext);
+procedure TWideCharSetType.DoDeserialize(const AInfo: TValueInfo; out AValue: TWideCharSet;
+  const Acontext: IDeserializationContext);
 var
   LStr: String;
 begin
-  AContext.GetValue(AInfo, LStr);
+  Acontext.GetValue(AInfo, LStr);
   AValue := TWideCharSet.Create(LStr);
 end;
 
-procedure TWideCharSetType.DoSerialize(const AInfo: TValueInfo; const AValue: TWideCharSet; const AContext: ISerializationContext);
+procedure TWideCharSetType.DoSerialize(const AInfo: TValueInfo; const AValue: TWideCharSet;
+  const Acontext: ISerializationContext);
 begin
   { The value of the charset is a simple string }
-  AContext.AddValue(AInfo, GetString(AValue));
+  Acontext.AddValue(AInfo, GetString(AValue));
 end;
 
 function TWideCharSetType.GenerateHashCode(const AValue: TWideCharSet): NativeInt;
@@ -299,7 +313,6 @@ begin
   ORes := GetString(AValue);
   Result := true;
 end;
-
 
 { TWideCharSet }
 
@@ -356,13 +369,19 @@ begin
 
     for I := 0 to R - 1 do
       Result.FPieces[I] := Result.FPieces[I] + ARight.FPieces[I];
-  end else
+  end
+  else
   begin
     Result := TWideCharSet.Create(ARight);
 
     for I := 0 to L - 1 do
       Result.FPieces[I] := Result.FPieces[I] + ALeft.FPieces[I];
   end
+end;
+
+class operator TWideCharSet.Add(const ALeft: TWideCharSet; const ARight: TSysCharSet): TWideCharSet;
+begin
+  Result := ALeft + TWideCharSet.Create(ARight);
 end;
 
 function TWideCharSet.AsCollection: IEnexCollection<Char>;
@@ -458,7 +477,7 @@ end;
 
 procedure TWideCharSet.MarkChar(const AChar: Char; const AMark: Boolean);
 var
-  LPieceIndex: NativeInt;  {REQ}
+  LPieceIndex: NativeInt; { REQ }
   LPieceChar: AnsiChar;
 begin
   { Calculate piece indexes }
@@ -496,7 +515,12 @@ end;
 
 class operator TWideCharSet.NotEqual(const ALeft, ARight: TWideCharSet): Boolean;
 begin
-  Result := not (ALeft = ARight);
+  Result := not(ALeft = ARight);
+end;
+
+class operator TWideCharSet.Subtract(const ALeft: TWideCharSet; const ARight: TSysCharSet): TWideCharSet;
+begin
+  Result := ALeft - TWideCharSet.Create(ARight);
 end;
 
 class operator TWideCharSet.Subtract(const ALeft: TWideCharSet; ARight: TWideCharSet): TWideCharSet;
@@ -633,6 +657,17 @@ end;
 function TWideCharSet.TEnumerable.GetEnumerator: IEnumerator<Char>;
 begin
   Result := TEnumerator.Create(FPieces);
+end;
+
+class operator TWideCharSet.Include(const ALeft: TWideCharSet; const ARight: TSysCharSet): TWideCharSet;
+begin
+  Result := ALeft + TWideCharSet.Create(ARight);
+end;
+
+class operator TWideCharSet.Exclude(const ALeft: TWideCharSet;
+  const ARight: TSysCharSet): TWideCharSet;
+begin
+  Result := ALeft - ARight;
 end;
 
 end.
